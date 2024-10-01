@@ -2,27 +2,36 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState([]);
+  const [title, setTitle] = useState('Hello World');
 
   useEffect(() => {
-    fetch('/api');
+    async function fetchData() {
+      const response = await fetch('http://localhost:3005/');
+      const data = await response.json();
+      setValue(data);
+    }
+    fetchData();
   }, []);
 
   return (
     <div className="App">
       <div className="App-text">
-        <h2>Hello World</h2>
-        <select
-          defaultValue={value}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        >
-          <option value="" disabled selected>
-            Select
+        <h2>{title}</h2>
+        <select onChange={(e) => setTitle(e.target.value)}>
+          <option value="Hello World" selected disabled>
+            Choose a language
           </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          {value.map((item) => {
+            const name = Object.keys(item);
+            const text = item[name];
+
+            return (
+              <option key={name} value={text}>
+                {name}
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>
