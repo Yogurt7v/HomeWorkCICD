@@ -1,5 +1,6 @@
 services:
   backend:
+    image: yogurt7v/homeworkcicdback
     build:
       context: ./backend
       dockerfile: back.dockerfile
@@ -8,6 +9,7 @@ services:
     volumes:
       - ./backend:/app
   frontend:
+    image: yogurt7v/homeworkcicd
     build:
       context: ./frontend
       dockerfile: front.dockerfile
