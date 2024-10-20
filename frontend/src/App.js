@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:3005/');
+      const response = await fetch('http://87.228.25.241:3005/');
       const data = await response.json();
       setValue(data);
     }
